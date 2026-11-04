@@ -1,17 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { 
-  Home, 
-  Bug, 
-  Building, 
-  Droplets, 
-  Utensils, 
-  ArrowUpDown, 
-  Car, 
+  DraftingCompass, 
+  Flame, 
+  Cog, 
+  ThermometerSun, 
+  Disc, 
+  CircleGauge, 
+  Microscope, 
   Wrench, 
-  FileText,
+  Boxes,
   Users,
-  Briefcase
+  ShieldCheck,
+  Factory
 } from 'lucide-astro';
 import copy from '../data/copy';
 
@@ -35,37 +36,37 @@ const values = [
 
 const capabilities = [
   {
-    icon: Home,
+    icon: DraftingCompass,
     title: copy['about-wwd-card-1-title'],
     description: copy['about-wwd-card-1-desc']
   },
   {
-    icon: Bug,
+    icon: Flame,
     title: copy['about-wwd-card-2-title'],
     description: copy['about-wwd-card-2-desc']
   },
   {
-    icon: Building,
+    icon: Cog,
     title: copy['about-wwd-card-3-title'],
     description: copy['about-wwd-card-3-desc']
   },
   {
-    icon: Droplets,
+    icon: ThermometerSun,
     title: copy['about-wwd-card-4-title'],
     description: copy['about-wwd-card-4-desc']
   },
   {
-    icon: Utensils,
+    icon: Disc,
     title: copy['about-wwd-card-5-title'],
     description: copy['about-wwd-card-5-desc']
   },
   {
-    icon: ArrowUpDown,
+    icon: CircleGauge,
     title: copy['about-wwd-card-6-title'],
     description: copy['about-wwd-card-6-desc']
   },
   {
-    icon: Car,
+    icon: Microscope,
     title: copy['about-wwd-card-7-title'],
     description: copy['about-wwd-card-7-desc']
   },
@@ -75,7 +76,7 @@ const capabilities = [
     description: copy['about-wwd-card-8-desc']
   },
   {
-    icon: FileText,
+    icon: Boxes,
     title: copy['about-wwd-card-9-title'],
     description: copy['about-wwd-card-9-desc']
   }
@@ -299,7 +300,7 @@ const milestones = [
 
         <div class="text-center animate-on-scroll">
           <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white">
-            <Briefcase class="w-8 h-8" />
+            <ShieldCheck class="w-8 h-8" />
           </div>
           <h3 class="text-xl font-bold text-gray-900 mb-2 font-serif">{copy['about-commit-p3-title']}</h3>
           <p class="text-gray-600 text-sm leading-relaxed">{copy['about-commit-p3-desc']}</p>
@@ -307,7 +308,7 @@ const milestones = [
 
         <div class="text-center animate-on-scroll">
           <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600">
-            <Building class="w-8 h-8" />
+            <Factory class="w-8 h-8" />
           </div>
           <h3 class="text-xl font-bold text-gray-900 mb-2 font-serif">{copy['about-commit-p4-title']}</h3>
           <p class="text-gray-600 text-sm leading-relaxed">{copy['about-commit-p4-desc']}</p>
