@@ -3,8 +3,22 @@ import copy from '../data/copy';
 ---
 
 <section id="home" class="relative w-full h-[280px] sm:h-[340px] md:h-[450px] overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950">
+  <!-- Background Video -->
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="/videos/8964729-uhd_3840_2160_25fps-poster.jpg"
+    class="absolute inset-0 w-full h-full object-cover"
+  >
+    <source src="/videos/8964729-uhd_3840_2160_25fps.webm" type="video/webm" />
+    <source src="/videos/8964729-uhd_3840_2160_25fps.mp4" type="video/mp4" />
+  </video>
+
   <!-- Gradient Overlay -->
-  <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/30 z-5"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/30 z-[5]"></div>
 
   <!-- Content - Bottom left aligned -->
   <div class="absolute inset-0 z-10 flex items-end pb-8 sm:pb-12">
