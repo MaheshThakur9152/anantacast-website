@@ -60,8 +60,7 @@ anantacast-website/
 │   │   ├── WhyAnantacast.astro    # 6-card USP grid with spring hover transitions
 │   │   ├── TrustedBySection.astro # Infinite smooth horizontal ticker
 │   │   ├── ServicesSection.astro  # 12-capability grid with expandable view toggle
-│   │   ├── ContactSection.astro   # RFQ inquiry form with client-side validation
-│   │   └── WhatsAppFixed.astro    # Floating WhatsApp CTA button
+│   │   └── ContactSection.astro   # RFQ inquiry form with client-side validation
 │   └── pages/
 │       ├── index.astro            # Homepage (/)
 │       ├── about.astro            # About Company & Values (/about)
