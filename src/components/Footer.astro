@@ -1,0 +1,228 @@
+---
+import { Facebook, Twitter, Instagram, Youtube, Phone, Mail, MapPin } from 'lucide-astro';
+import copy from '../data/copy';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-gray-900 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Company Info -->
+      <div>
+        <h3 class="font-serif text-xl font-bold text-white mb-6">
+          {copy['footer-title']}
+        </h3>
+        <p class="text-gray-300 mb-6 leading-relaxed">
+          {copy['footer-desc']}
+        </p>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <Phone class="w-5 h-5 text-blue-400" />
+            <a href="tel:+919619607537" class="text-gray-300 hover:text-white transition-colors">
+              +91 9619607537
+            </a>
+          </div>
+          <div class="flex items-center gap-3">
+            <Phone class="w-5 h-5 text-blue-400" />
+            <a href="tel:+917977018742" class="text-gray-300 hover:text-white transition-colors">
+              +91 7977018742
+            </a>
+          </div>
+          <div class="flex items-center gap-3">
+            <Phone class="w-5 h-5 text-blue-400" />
+            <a href="tel:+02245066566" class="text-gray-300 hover:text-white transition-colors">
+              +022 4506 6566
+            </a>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 pt-3">
+          <Mail class="w-5 h-5 text-blue-400" />
+          <a href={`mailto:${copy['footer-email']}`} class="text-gray-300 hover:text-white transition-colors">
+            {copy['footer-email']}
+          </a>
+        </div>
+        <div class="flex items-start gap-3 pt-3">
+          <MapPin class="w-5 h-5 text-blue-400 mt-1" />
+          <span class="text-gray-300">{copy['footer-location']}</span>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="font-serif text-xl font-bold text-white mb-6">{copy['footer-col-2-title']}</h3>
+        <ul class="space-y-3">
+          <li>
+            <a
+              href="/"
+              class="text-gray-300 hover:text-blue-400 transition-colors duration-300"
+            >
+              {copy['footer-link-home']}
+            </a>
+          </li>
+          <li>
+            <a
+              href="/services"
+              class="text-gray-300 hover:text-blue-400 transition-colors duration-300"
+            >
+              {copy['footer-link-services']}
+            </a>
+          </li>
+          <li>
+            <a
+              href="/#why-anantacast"
+              class="text-gray-300 hover:text-blue-400 transition-colors duration-300"
+            >
+              {copy['footer-link-why-us']}
+            </a>
+          </li>
+          <li>
+            <a
+              href="/about"
+              class="text-gray-300 hover:text-blue-400 transition-colors duration-300"
+            >
+              {copy['footer-link-about']}
+            </a>
+          </li>
+          <li>
+            <a
+              href="/#testimonials"
+              class="text-gray-300 hover:text-blue-400 transition-colors duration-300"
+            >
+              {copy['footer-link-testimonials']}
+            </a>
+          </li>
+          <li>
+            <a
+              href="/contact"
+              class="text-gray-300 hover:text-blue-400 transition-colors duration-300"
+            >
+              {copy['footer-link-contact']}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Capabilities List -->
+      <div>
+        <h3 class="font-serif text-xl font-bold text-white mb-6">{copy['footer-col-3-title']}</h3>
+        <ul class="space-y-3">
+          <li>
+            <a href="/services#patternmaking" class="text-gray-300 hover:text-white transition-colors">
+              {copy['service-card-1-title']}
+            </a>
+          </li>
+          <li>
+            <a href="/services#casting" class="text-gray-300 hover:text-white transition-colors">
+              {copy['service-card-2-title']}
+            </a>
+          </li>
+          <li>
+            <a href="/services#machining" class="text-gray-300 hover:text-white transition-colors">
+              {copy['service-card-3-title']}
+            </a>
+          </li>
+          <li>
+            <a href="/services#heat-treatment" class="text-gray-300 hover:text-white transition-colors">
+              {copy['service-card-4-title']}
+            </a>
+          </li>
+          <li>
+            <a href="/services#finishing" class="text-gray-300 hover:text-white transition-colors">
+              {copy['service-card-5-title']}
+            </a>
+          </li>
+          <li>
+            <a href="/services#metrology" class="text-gray-300 hover:text-white transition-colors">
+              {copy['service-card-6-title']}
+            </a>
+          </li>
+          <li>
+            <a href="/services#alloys" class="text-gray-300 hover:text-white transition-colors">
+              {copy['service-card-7-title']}
+            </a>
+          </li>
+          <li>
+            <a href="/services#tooling" class="text-gray-300 hover:text-white transition-colors">
+              {copy['service-card-8-title']}
+            </a>
+          </li>
+          <li>
+            <a href="/services#assembly" class="text-gray-300 hover:text-white transition-colors">
+              {copy['service-card-9-title']}
+            </a>
+          </li>
+          <li>
+            <a href="/services#testing" class="text-gray-300 hover:text-white transition-colors">
+              {copy['service-card-10-title']}
+            </a>
+          </li>
+          <li>
+            <a href="/services#dfm" class="text-gray-300 hover:text-white transition-colors">
+              {copy['service-card-11-title']}
+            </a>
+          </li>
+          <li>
+            <a href="/services#coating" class="text-gray-300 hover:text-white transition-colors">
+              {copy['service-card-12-title']}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Social Media Links -->
+    <div class="border-t border-gray-700 mt-12 pt-8">
+      <div class="flex justify-center items-center">
+        <div class="flex items-center space-x-4">
+          <span class="text-gray-300 mr-4">{copy['footer-follow-us']}</span>
+          <a
+            href="#"
+            class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 hover:bg-blue-600 hover:text-white transition-colors duration-300"
+            aria-label="Facebook"
+          >
+            <Facebook class="w-5 h-5" />
+          </a>
+          <a
+            href="#"
+            class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 hover:bg-blue-400 hover:text-white transition-colors duration-300"
+            aria-label="Twitter"
+          >
+            <Twitter class="w-5 h-5" />
+          </a>
+          <a
+            href="#"
+            class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 hover:bg-pink-600 hover:text-white transition-colors duration-300"
+            aria-label="Instagram"
+          >
+            <Instagram class="w-5 h-5" />
+          </a>
+          <a
+            href="#"
+            class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 hover:bg-red-600 hover:text-white transition-colors duration-300"
+            aria-label="YouTube"
+          >
+            <Youtube class="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="border-t border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        <div class="text-gray-300 text-sm">
+          © {currentYear} {copy['footer-copyright']}
+        </div>
+        <div class="flex space-x-6 text-sm text-gray-300">
+          <a href="#" class="hover:text-blue-400 transition-colors">{copy['footer-privacy']}</a>
+          <a href="#" class="hover:text-blue-400 transition-colors">{copy['footer-terms']}</a>
+          <a href="/sitemap-index.xml" class="hover:text-blue-400 transition-colors">{copy['footer-sitemap']}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

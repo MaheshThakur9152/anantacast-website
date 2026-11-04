@@ -1,0 +1,295 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Mail, Building2, Phone, Send } from 'lucide-astro';
+import copy from '../data/copy';
+
+const serviceOptions = [
+  copy['services-p-card-1-title'],
+  copy['services-p-card-2-title'],
+  copy['services-p-card-3-title'],
+  copy['services-p-card-4-title'],
+  copy['services-p-card-5-title'],
+  copy['services-p-card-6-title'],
+  copy['services-p-card-7-title'],
+  copy['services-p-card-8-title'],
+  copy['services-p-card-9-title'],
+  'Custom OEM Casting Project'
+];
+
+const locationOptions = [
+  'Domestic - Western India (Gujarat / Maharashtra)',
+  'Domestic - Northern India',
+  'Domestic - Southern India',
+  'Export - North America (USA / Canada)',
+  'Export - European Union',
+  'Export - Middle East & Global'
+];
+
+const countryCodes = [
+  { code: '+91', country: 'India' },
+  { code: '+1', country: 'USA' },
+  { code: '+44', country: 'UK' },
+  { code: '+971', country: 'UAE' },
+];
+---
+
+<Layout
+  title={copy['meta-contact-title']}
+  description={copy['meta-contact-desc']}
+>
+  <!-- Hero Section -->
+  <section class="relative w-full h-[40vh] flex items-center justify-center overflow-hidden bg-gradient-to-r from-slate-950 via-slate-900 to-blue-950">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 text-center text-white animate-on-scroll">
+      <h1 class="text-5xl md:text-6xl font-bold font-serif">{copy['contact-page-hero']}</h1>
+    </div>
+  </section>
+
+  <!-- Contact Form & Info Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <!-- Contact Form -->
+        <div class="bg-white p-4 sm:p-8 rounded-xl shadow-lg order-1 animate-on-scroll">
+          <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 font-serif">
+            {copy['contact-page-form-title']}
+          </h2>
+
+          <form id="contact-page-form" class="space-y-6">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label for="fullName" class="block text-sm font-medium text-gray-700 mb-2">
+                  {copy['contact-page-name-label']}
+                </label>
+                <input
+                  type="text"
+                  id="fullName"
+                  name="fullName"
+                  required
+                  placeholder={copy['contact-page-name-ph']}
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all"
+                />
+              </div>
+
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                  {copy['contact-page-email-label']}
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder={copy['contact-page-email-ph']}
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all"
+                />
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4">
+              <div>
+                <label for="countryCode" class="block text-sm font-medium text-gray-700 mb-2">
+                  {copy['contact-page-country-code']}
+                </label>
+                <select
+                  id="countryCode"
+                  name="countryCode"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all"
+                >
+                  {countryCodes.map((c) => (
+                    <option value={c.code}>{c.code} ({c.country})</option>
+                  ))}
+                </select>
+              </div>
+
+              <div class="md:col-span-2">
+                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
+                  {copy['contact-page-phone-label']}
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  placeholder={copy['contact-page-phone-ph']}
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all"
+                />
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label for="serviceCategory" class="block text-sm font-medium text-gray-700 mb-2">
+                  {copy['contact-page-service-label']}
+                </label>
+                <select
+                  id="serviceCategory"
+                  name="serviceCategory"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all"
+                >
+                  <option value="">{copy['contact-page-service-ph']}</option>
+                  {serviceOptions.map((opt) => (
+                    <option value={opt}>{opt}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label for="location" class="block text-sm font-medium text-gray-700 mb-2">
+                  {copy['contact-page-loc-label']}
+                </label>
+                <select
+                  id="location"
+                  name="location"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all"
+                >
+                  <option value="">{copy['contact-page-loc-ph']}</option>
+                  {locationOptions.map((loc) => (
+                    <option value={loc}>{loc}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+                {copy['contact-page-msg-label']}
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={4}
+                required
+                placeholder={copy['contact-page-msg-ph']}
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 resize-vertical transition-all"
+              ></textarea>
+            </div>
+
+            <div class="flex items-center">
+              <input
+                type="checkbox"
+                id="receiveCommunications"
+                name="receiveCommunications"
+                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <label for="receiveCommunications" class="ml-2 block text-sm text-gray-700">
+                {copy['contact-page-optin']}
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              id="contact-page-submit-btn"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full transition-colors flex items-center justify-center space-x-2 shadow-md cursor-pointer disabled:opacity-50"
+            >
+              <Send class="w-[18px] h-[18px]" />
+              <span id="contact-page-submit-txt">{copy['contact-page-submit-btn']}</span>
+            </button>
+
+            <div id="contact-page-feedback" class="hidden p-4 rounded-lg bg-green-100 text-green-800 text-sm">
+              {copy['contact-page-success-txt']}
+            </div>
+          </form>
+        </div>
+
+        <!-- Contact Info Card -->
+        <div class="bg-blue-600 text-white p-4 sm:p-8 rounded-xl shadow-lg max-w-md mx-auto lg:max-w-none order-2 lg:order-2 animate-on-scroll">
+          <h3 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 font-serif">
+            {copy['contact-page-info-title']}
+          </h3>
+
+          <div class="space-y-4 sm:space-y-6">
+            <div class="flex items-start space-x-3 sm:space-x-4">
+              <Mail class="w-5 h-5 sm:w-6 sm:h-6 mt-1 flex-shrink-0 text-blue-200" />
+              <div>
+                <h4 class="font-semibold text-base sm:text-lg mb-1 font-serif">
+                  {copy['contact-page-inq-title']}
+                </h4>
+                <a href={`mailto:${copy['contact-page-inq-email']}`} class="text-blue-100 text-sm sm:text-base hover:underline">
+                  {copy['contact-page-inq-email']}
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3 sm:space-x-4">
+              <Building2 class="w-5 h-5 sm:w-6 sm:h-6 mt-1 flex-shrink-0 text-blue-200" />
+              <div>
+                <h4 class="font-semibold text-base sm:text-lg mb-1 font-serif">
+                  {copy['contact-page-office-title']}
+                </h4>
+                <p class="text-blue-100 leading-relaxed text-sm sm:text-base">
+                  {copy['contact-page-office-addr']}
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3 sm:space-x-4">
+              <Phone class="w-5 h-5 sm:w-6 sm:h-6 mt-1 flex-shrink-0 text-blue-200" />
+              <div>
+                <h4 class="font-semibold text-base sm:text-lg mb-1 font-serif">
+                  {copy['contact-page-phone-title']}
+                </h4>
+                <p class="text-blue-100 text-sm sm:text-base">
+                  +91 9619607537<br />
+                  +91 7977018742<br />
+                  +022 4506 6566
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Maps Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-8 font-serif animate-on-scroll">
+        {copy['contact-page-map-title']}
+      </h2>
+      <div class="w-full animate-on-scroll">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118147.68202029969!2d70.7512555!3d22.2736308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959c98ac71cdf0f%3A0x76dd15cfbe93ad3b!2sRajkot%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+          class="w-full h-96 rounded-lg shadow-md border-0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Anantacast Manufacturing Location Map"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  function setupContactPageForm() {
+    const form = document.getElementById('contact-page-form') as HTMLFormElement;
+    const submitBtn = document.getElementById('contact-page-submit-btn') as HTMLButtonElement;
+    const submitTxt = document.getElementById('contact-page-submit-txt');
+    const feedback = document.getElementById('contact-page-feedback');
+
+    if (!form || !submitBtn || !submitTxt || !feedback) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitTxt.textContent = 'Sending...';
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitTxt.textContent = 'Submit RFQ';
+        feedback.classList.remove('hidden');
+        form.reset();
+
+        setTimeout(() => {
+          feedback.classList.add('hidden');
+        }, 5000);
+      }, 1500);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', setupContactPageForm);
+</script>

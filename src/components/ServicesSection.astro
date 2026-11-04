@@ -1,0 +1,185 @@
+---
+import { 
+  Sparkles, 
+  Bug, 
+  Waves, 
+  Coffee,
+  Building2,
+  Home,
+  Package,
+  FileText,
+  Car,
+  Wrench,
+  HardHat,
+  Building,
+  ChevronDown
+} from 'lucide-astro';
+import copy from '../data/copy';
+
+const services = [
+  {
+    icon: Sparkles,
+    title: copy['service-card-1-title'],
+    description: copy['service-card-1-desc'],
+    slug: 'patternmaking'
+  },
+  {
+    icon: Bug,
+    title: copy['service-card-2-title'],
+    description: copy['service-card-2-desc'],
+    slug: 'casting'
+  },
+  {
+    icon: Waves,
+    title: copy['service-card-3-title'],
+    description: copy['service-card-3-desc'],
+    slug: 'machining'
+  },
+  {
+    icon: Coffee,
+    title: copy['service-card-4-title'],
+    description: copy['service-card-4-desc'],
+    slug: 'heat-treatment'
+  },
+  {
+    icon: Building2,
+    title: copy['service-card-5-title'],
+    description: copy['service-card-5-desc'],
+    slug: 'finishing'
+  },
+  {
+    icon: Home,
+    title: copy['service-card-6-title'],
+    description: copy['service-card-6-desc'],
+    slug: 'metrology'
+  },
+  {
+    icon: Package,
+    title: copy['service-card-7-title'],
+    description: copy['service-card-7-desc'],
+    slug: 'alloys'
+  },
+  {
+    icon: FileText,
+    title: copy['service-card-8-title'],
+    description: copy['service-card-8-desc'],
+    slug: 'tooling'
+  },
+  {
+    icon: Car,
+    title: copy['service-card-9-title'],
+    description: copy['service-card-9-desc'],
+    slug: 'assembly'
+  },
+  {
+    icon: Wrench,
+    title: copy['service-card-10-title'],
+    description: copy['service-card-10-desc'],
+    slug: 'testing'
+  },
+  {
+    icon: HardHat,
+    title: copy['service-card-11-title'],
+    description: copy['service-card-11-desc'],
+    slug: 'dfm'
+  },
+  {
+    icon: Building,
+    title: copy['service-card-12-title'],
+    description: copy['service-card-12-desc'],
+    slug: 'coating'
+  }
+];
+---
+
+<section id="services" class="py-20 md:py-28 bg-white">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16 animate-on-scroll">
+      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        {copy['services-heading']}
+      </h2>
+      <p class="font-sans text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
+        {copy['services-subtitle']}
+      </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {services.map((service, index) => (
+        <div
+          class={`service-card group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 animate-on-scroll ${
+            index >= 6 ? 'hidden extra-service' : ''
+          }`}
+          data-index={index}
+        >
+          <!-- Styled Container (Maintains exact h-56 layout without media requests) -->
+          <div class="relative h-56 overflow-hidden bg-gradient-to-br from-slate-100 via-gray-100 to-slate-200 border-b border-gray-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+            <div class="w-16 h-16 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/60 shadow-sm flex items-center justify-center text-blue-600">
+              <service.icon class="w-8 h-8" />
+            </div>
+          </div>
+          
+          <!-- Card Content -->
+          <div class="p-6">
+            <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
+              <service.icon class="w-6 h-6 text-blue-600" />
+            </div>
+            <h3 class="font-serif text-xl font-bold text-gray-900 mb-3">
+              {service.title}
+            </h3>
+            <p class="font-sans text-sm text-gray-600 leading-relaxed">
+              {service.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- View More Button -->
+    <div class="flex justify-center mt-12">
+      <button
+        id="toggle-services-btn"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-sans font-semibold transition-all duration-300 hover:shadow-lg flex items-center gap-2 transform hover:scale-105 active:scale-95"
+      >
+        <span id="btn-text">{copy['services-view-more-btn']}</span>
+        <ChevronDown id="btn-icon" class="h-5 w-5 transition-transform duration-300" />
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupServicesToggle() {
+    const btn = document.getElementById('toggle-services-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnIcon = document.getElementById('btn-icon');
+    const extraCards = document.querySelectorAll('.extra-service');
+
+    if (!btn || !btnText || !btnIcon) return;
+
+    let isExpanded = false;
+
+    btn.addEventListener('click', () => {
+      isExpanded = !isExpanded;
+      extraCards.forEach(card => {
+        if (isExpanded) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (isExpanded) {
+        btnText.textContent = 'Show Less';
+        btnIcon.classList.add('rotate-180');
+      } else {
+        btnText.textContent = 'View More Capabilities';
+        btnIcon.classList.remove('rotate-180');
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', setupServicesToggle);
+</script>

@@ -1,0 +1,201 @@
+---
+import { Menu, X, Mail } from 'lucide-astro';
+import copy from '../data/copy';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = Astro.url.pathname } = Astro.props;
+---
+
+<header id="site-header" class="sticky top-0 left-0 right-0 z-50 transition-all duration-300 bg-white">
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <div class="flex justify-between items-center py-4">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href="/" class="pl-0 font-serif text-2xl font-bold text-blue-900">
+          {copy['header-logo']}
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-12">
+        <a
+          href="/"
+          class={`font-sans text-base font-medium transition-colors ${
+            currentPath === '/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+          }`}
+        >
+          {copy['header-nav-home']}
+        </a>
+        <a
+          href="/services"
+          class={`font-sans text-base font-medium transition-colors ${
+            currentPath === '/services' || currentPath === '/services/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+          }`}
+        >
+          {copy['header-nav-services']}
+        </a>
+        <a
+          href="/#why-anantacast"
+          class="font-sans text-base font-medium text-gray-700 hover:text-blue-600 transition-colors"
+        >
+          {copy['header-nav-why-us']}
+        </a>
+        <a
+          href="/about"
+          class={`font-sans text-base font-medium transition-colors ${
+            currentPath === '/about' || currentPath === '/about/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+          }`}
+        >
+          {copy['header-nav-about']}
+        </a>
+      </nav>
+
+      <!-- Contact Us CTA Button -->
+      <a
+        href="/contact"
+        class="hidden md:flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-medium transition-colors"
+      >
+        <Mail class="w-[18px] h-[18px]" />
+        <span>{copy['header-cta']}</span>
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-toggle"
+        class="md:hidden p-2 text-gray-700 hover:text-blue-600 transition-colors focus:outline-none"
+        aria-label="Toggle Navigation Menu"
+      >
+        <span id="menu-icon-open"><Menu class="w-6 h-6" /></span>
+        <span id="menu-icon-close" class="hidden"><X class="w-6 h-6" /></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Backdrop -->
+  <div
+    id="mobile-backdrop"
+    class="hidden fixed inset-0 z-40 bg-black/50 transition-opacity"
+  ></div>
+
+  <!-- Mobile Menu Sidebar -->
+  <div
+    id="mobile-drawer"
+    class="fixed top-0 right-0 h-screen w-72 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto"
+  >
+    <!-- Close Button -->
+    <button
+      id="mobile-drawer-close"
+      class="absolute top-4 right-4 p-2 text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+      aria-label="Close Navigation Menu"
+    >
+      <X class="w-6 h-6" />
+    </button>
+
+    <!-- Menu Content -->
+    <div class="pt-16 px-6">
+      <nav class="space-y-4">
+        <a
+          href="/"
+          class={`block w-full text-left py-3 px-4 rounded-lg transition-colors ${
+            currentPath === '/' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+          }`}
+        >
+          {copy['header-mobile-home']}
+        </a>
+        <a
+          href="/services"
+          class={`block w-full text-left py-3 px-4 rounded-lg transition-colors ${
+            currentPath === '/services' || currentPath === '/services/' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+          }`}
+        >
+          {copy['header-mobile-services']}
+        </a>
+        <a
+          href="/#why-anantacast"
+          class="block w-full text-left py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors mobile-nav-anchor"
+        >
+          {copy['header-mobile-why-us']}
+        </a>
+        <a
+          href="/about"
+          class={`block w-full text-left py-3 px-4 rounded-lg transition-colors ${
+            currentPath === '/about' || currentPath === '/about/' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+          }`}
+        >
+          {copy['header-mobile-about']}
+        </a>
+        <a
+          href="/#testimonials"
+          class="block w-full text-left py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors mobile-nav-anchor"
+        >
+          {copy['header-mobile-testimonials']}
+        </a>
+        <a
+          href="/contact"
+          class={`block w-full text-left py-3 px-4 rounded-lg transition-colors ${
+            currentPath === '/contact' || currentPath === '/contact/' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+          }`}
+        >
+          {copy['header-mobile-contact']}
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  function setupHeader() {
+    const header = document.getElementById('site-header');
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    const closeBtn = document.getElementById('mobile-drawer-close');
+    const drawer = document.getElementById('mobile-drawer');
+    const backdrop = document.getElementById('mobile-backdrop');
+    const openIcon = document.getElementById('menu-icon-open');
+    const closeIcon = document.getElementById('menu-icon-close');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-anchor');
+
+    // Sticky scroll effect
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header?.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-lg');
+        header?.classList.remove('bg-white');
+      } else {
+        header?.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-lg');
+        header?.classList.add('bg-white');
+      }
+    });
+
+    function openMenu() {
+      drawer?.classList.remove('translate-x-full');
+      backdrop?.classList.remove('hidden');
+      openIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      drawer?.classList.add('translate-x-full');
+      backdrop?.classList.add('hidden');
+      openIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    toggleBtn?.addEventListener('click', () => {
+      if (drawer?.classList.contains('translate-x-full')) {
+        openMenu();
+      } else {
+        closeMenu();
+      }
+    });
+
+    closeBtn?.addEventListener('click', closeMenu);
+    backdrop?.addEventListener('click', closeMenu);
+    mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+  }
+
+  document.addEventListener('DOMContentLoaded', setupHeader);
+</script>

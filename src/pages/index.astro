@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Statistics from '../components/Statistics.astro';
+import OurPeople from '../components/OurPeople.astro';
+import Testimonials from '../components/Testimonials.astro';
+import WhyAnantacast from '../components/WhyAnantacast.astro';
+import TrustedBySection from '../components/TrustedBySection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import copy from '../data/copy';
+---
+
+<Layout
+  title={copy['meta-home-title']}
+  description={copy['meta-home-desc']}
+>
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- Statistics Section -->
+  <Statistics />
+
+  <!-- Our People Section -->
+  <OurPeople />
+
+  <!-- Testimonials Section -->
+  <Testimonials />
+
+  <!-- Why Anantacast Section -->
+  <WhyAnantacast />
+
+  <!-- Trusted by Leading Companies Section -->
+  <TrustedBySection />
+
+  <!-- Services Capabilities Section -->
+  <ServicesSection />
+
+  <!-- Contact Quotation Section -->
+  <ContactSection />
+</Layout>

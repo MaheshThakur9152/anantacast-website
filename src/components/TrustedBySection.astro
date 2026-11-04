@@ -1,0 +1,72 @@
+---
+import copy from '../data/copy';
+
+const industrySectors = [
+  'Automotive Powertrains',
+  'Hydraulic Assemblies',
+  'Industrial Valves',
+  'Pump Components',
+  'Power Transmission',
+  'Heavy Machinery',
+  'Electrical Enclosures',
+  'Energy Equipment',
+  'Fluid Systems',
+  'Railway Components',
+  'Material Handling',
+  'Agricultural Equipment'
+];
+---
+
+<section class="py-8 md:py-12 bg-white border-t border-gray-100" aria-label="Trusted Manufacturing Sectors">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="text-center mb-6 md:mb-8 animate-on-scroll">
+      <h2 class="font-serif text-xl md:text-3xl font-bold text-gray-900 mb-2">
+        {copy['trusted-heading']}
+      </h2>
+    </div>
+    
+    <div class="relative overflow-hidden" role="region" aria-live="off">
+      <div id="trusted-ticker" class="flex gap-6 md:gap-12 will-change-transform">
+        {[...industrySectors, ...industrySectors, ...industrySectors, ...industrySectors].map((sector) => (
+          <div class="flex-shrink-0 flex items-center justify-center">
+            <div class="w-32 md:w-48 h-10 md:h-16 px-4 border border-gray-200 rounded-lg bg-gray-50/60 flex items-center justify-center text-gray-700 font-semibold text-xs md:text-sm tracking-wide text-center hover:border-blue-400 hover:bg-blue-50/50 transition-colors">
+              {sector}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupTicker() {
+    const ticker = document.getElementById('trusted-ticker') as HTMLElement | null;
+    if (!ticker) return;
+
+    let position = 0;
+    let animationFrameId: number;
+    const isMobile = window.innerWidth < 768;
+    const speed = isMobile ? 0.75 : 1.25;
+
+    function animate() {
+      if (!ticker) return;
+      position += speed;
+      const singleSetWidth = ticker.scrollWidth / 2;
+      if (position >= singleSetWidth) {
+        position = 0;
+      }
+      ticker.style.transform = `translateX(-${position}px)`;
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    // Clean up properly to prevent memory leaks
+    window.addEventListener('beforeunload', () => {
+      cancelAnimationFrame(animationFrameId);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', setupTicker);
+</script>

@@ -1,0 +1,133 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { 
+  Home, 
+  Bug, 
+  Building, 
+  Droplets, 
+  Utensils, 
+  ArrowUpDown, 
+  Car, 
+  Wrench, 
+  FileText 
+} from 'lucide-astro';
+import copy from '../data/copy';
+
+const serviceCards = [
+  {
+    title: copy['services-p-card-1-title'],
+    description: copy['services-p-card-1-desc'],
+    icon: Home,
+    slug: 'patternmaking'
+  },
+  {
+    title: copy['services-p-card-2-title'],
+    description: copy['services-p-card-2-desc'],
+    icon: Bug,
+    slug: 'casting'
+  },
+  {
+    title: copy['services-p-card-3-title'],
+    description: copy['services-p-card-3-desc'],
+    icon: Building,
+    slug: 'machining'
+  },
+  {
+    title: copy['services-p-card-4-title'],
+    description: copy['services-p-card-4-desc'],
+    icon: Droplets,
+    slug: 'heat-treatment'
+  },
+  {
+    title: copy['services-p-card-5-title'],
+    description: copy['services-p-card-5-desc'],
+    icon: Utensils,
+    slug: 'finishing'
+  },
+  {
+    title: copy['services-p-card-6-title'],
+    description: copy['services-p-card-6-desc'],
+    icon: ArrowUpDown,
+    slug: 'metrology'
+  },
+  {
+    title: copy['services-p-card-7-title'],
+    description: copy['services-p-card-7-desc'],
+    icon: Car,
+    slug: 'alloys'
+  },
+  {
+    title: copy['services-p-card-8-title'],
+    description: copy['services-p-card-8-desc'],
+    icon: Wrench,
+    slug: 'assembly'
+  },
+  {
+    title: copy['services-p-card-9-title'],
+    description: copy['services-p-card-9-desc'],
+    icon: FileText,
+    slug: 'packaging'
+  }
+];
+---
+
+<Layout
+  title={copy['meta-services-title']}
+  description={copy['meta-services-desc']}
+>
+  <!-- Hero Section -->
+  <section class="relative w-full h-[40vh] flex items-center justify-center overflow-hidden bg-gradient-to-r from-slate-950 via-slate-900 to-blue-950">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 text-center text-white animate-on-scroll">
+      <h1 class="text-5xl md:text-6xl font-bold font-serif">{copy['services-page-hero']}</h1>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section id="services" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif">
+          {copy['services-page-what-offer-title']}
+        </h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          {copy['services-page-what-offer-desc']}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {serviceCards.map((service) => (
+          <div
+            id={service.slug}
+            class="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 animate-on-scroll scroll-mt-28"
+          >
+            <!-- Styled Container (Maintains exact h-56 layout without media requests) -->
+            <div class="relative h-56 overflow-hidden bg-gradient-to-br from-slate-100 via-gray-100 to-slate-200 border-b border-gray-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+              <div class="w-16 h-16 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/60 shadow-sm flex items-center justify-center text-blue-600">
+                <service.icon class="w-8 h-8" />
+              </div>
+            </div>
+            
+            <div class="p-6">
+              <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
+                <service.icon class="w-6 h-6 text-blue-600" />
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3 font-serif">
+                {service.title}
+              </h3>
+              <p class="text-gray-600 mb-4 leading-relaxed text-sm">
+                {service.description}
+              </p>
+              <a
+                href="/contact"
+                class="inline-flex items-center px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium transition-colors text-sm shadow-sm"
+              >
+                {copy['services-p-card-learn-more']}
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
