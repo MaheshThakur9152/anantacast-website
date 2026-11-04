@@ -1,7 +1,6 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import WhatsAppFixed from '../components/WhatsAppFixed.astro';
 import copy from '../data/copy';
 import '../styles/globals.css';
 
@@ -67,7 +66,6 @@ const siteUrl = 'https://anantacast.com';
       "alternateName": "Anantacast",
       "description": description,
       "url": siteUrl,
-      "telephone": "+91-9619607537",
       "email": "contact@anantacast.com",
       "address": {
         "@type": "PostalAddress",
@@ -86,17 +84,19 @@ const siteUrl = 'https://anantacast.com';
       ]
     })} />
   </head>
-  <body class="font-sans antialiased text-gray-900 bg-white min-h-screen flex flex-col">
+  <body class="font-sans antialiased text-gray-900 bg-white min-h-screen flex flex-col overflow-x-hidden">
     <Header currentPath={Astro.url.pathname} />
     <main class="flex-grow">
       <slot />
     </main>
     <Footer />
-    <WhatsAppFixed />
 
     <!-- Scroll Reveal IntersectionObserver -->
     <script>
       function initScrollAnimations() {
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        if (!animatedElements.length) return;
+
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -105,16 +105,20 @@ const siteUrl = 'https://anantacast.com';
             }
           });
         }, {
-          threshold: 0.1,
-          rootMargin: '50px'
+          threshold: 0.08,
+          rootMargin: '0px 0px -30px 0px'
         });
 
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        animatedElements.forEach(el => {
           observer.observe(el);
         });
       }
 
-      document.addEventListener('DOMContentLoaded', initScrollAnimations);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initScrollAnimations);
+      } else {
+        initScrollAnimations();
+      }
     </script>
   </body>
 </html>

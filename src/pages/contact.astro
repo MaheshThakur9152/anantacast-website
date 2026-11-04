@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Mail, Building2, Phone, Send } from 'lucide-astro';
+import { Mail, Building2, Send } from 'lucide-astro';
 import copy from '../data/copy';
 
 const serviceOptions = [
@@ -40,8 +40,8 @@ const countryCodes = [
   <!-- Hero Section -->
   <section class="relative w-full h-[40vh] flex items-center justify-center overflow-hidden bg-gradient-to-r from-slate-950 via-slate-900 to-blue-950">
     <div class="absolute inset-0 bg-black/60"></div>
-    <div class="relative z-10 text-center text-white animate-on-scroll">
-      <h1 class="text-5xl md:text-6xl font-bold font-serif">{copy['contact-page-hero']}</h1>
+    <div class="relative z-10 text-center text-white px-4 animate-on-scroll">
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold font-serif tracking-tight">{copy['contact-page-hero']}</h1>
     </div>
   </section>
 
@@ -221,20 +221,6 @@ const countryCodes = [
                 </h4>
                 <p class="text-blue-100 leading-relaxed text-sm sm:text-base">
                   {copy['contact-page-office-addr']}
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-start space-x-3 sm:space-x-4">
-              <Phone class="w-5 h-5 sm:w-6 sm:h-6 mt-1 flex-shrink-0 text-blue-200" />
-              <div>
-                <h4 class="font-semibold text-base sm:text-lg mb-1 font-serif">
-                  {copy['contact-page-phone-title']}
-                </h4>
-                <p class="text-blue-100 text-sm sm:text-base">
-                  +91 9619607537<br />
-                  +91 7977018742<br />
-                  +022 4506 6566
                 </p>
               </div>
             </div>

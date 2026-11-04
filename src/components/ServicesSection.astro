@@ -92,44 +92,44 @@ const services = [
 ];
 ---
 
-<section id="services" class="py-20 md:py-28 bg-white">
-  <div class="max-w-7xl mx-auto px-6 md:px-12">
+<section id="services" class="py-16 md:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
     
     <!-- Section Header -->
-    <div class="text-center mb-16 animate-on-scroll">
-      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+    <div class="text-center mb-12 sm:mb-16 animate-on-scroll">
+      <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
         {copy['services-heading']}
       </h2>
-      <p class="font-sans text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
+      <p class="font-sans text-base sm:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
         {copy['services-subtitle']}
       </p>
     </div>
 
     <!-- Services Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
       {services.map((service, index) => (
         <div
-          class={`service-card group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 animate-on-scroll ${
+          class={`service-card group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 border border-gray-100 animate-on-scroll ${
             index >= 6 ? 'hidden extra-service' : ''
           }`}
           data-index={index}
         >
-          <!-- Styled Container (Maintains exact h-56 layout without media requests) -->
-          <div class="relative h-56 overflow-hidden bg-gradient-to-br from-slate-100 via-gray-100 to-slate-200 border-b border-gray-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-            <div class="w-16 h-16 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/60 shadow-sm flex items-center justify-center text-blue-600">
-              <service.icon class="w-8 h-8" />
+          <!-- Styled Container (Maintains exact layout without media requests) -->
+          <div class="relative h-44 sm:h-56 overflow-hidden bg-gradient-to-br from-slate-100 via-gray-100 to-slate-200 border-b border-gray-100 flex items-center justify-center group-hover:scale-102 transition-transform duration-500">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/90 backdrop-blur-sm border border-gray-200/60 shadow-sm flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform duration-300">
+              <service.icon class="w-7 h-7 sm:w-8 sm:h-8" />
             </div>
           </div>
           
           <!-- Card Content -->
-          <div class="p-6">
-            <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
-              <service.icon class="w-6 h-6 text-blue-600" />
+          <div class="p-5 sm:p-6">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4 text-blue-600">
+              <service.icon class="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <h3 class="font-serif text-xl font-bold text-gray-900 mb-3">
+            <h3 class="font-serif text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
               {service.title}
             </h3>
-            <p class="font-sans text-sm text-gray-600 leading-relaxed">
+            <p class="font-sans text-xs sm:text-sm text-gray-600 leading-relaxed">
               {service.description}
             </p>
           </div>
@@ -138,10 +138,10 @@ const services = [
     </div>
 
     <!-- View More Button -->
-    <div class="flex justify-center mt-12">
+    <div class="flex justify-center mt-10 sm:mt-12">
       <button
         id="toggle-services-btn"
-        class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-sans font-semibold transition-all duration-300 hover:shadow-lg flex items-center gap-2 transform hover:scale-105 active:scale-95"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-7 sm:px-8 py-3 rounded-xl font-sans font-semibold transition-all duration-300 hover:shadow-lg flex items-center gap-2 transform hover:scale-105 active:scale-95 text-sm sm:text-base cursor-pointer"
       >
         <span id="btn-text">{copy['services-view-more-btn']}</span>
         <ChevronDown id="btn-icon" class="h-5 w-5 transition-transform duration-300" />
@@ -181,5 +181,9 @@ const services = [
     });
   }
 
-  document.addEventListener('DOMContentLoaded', setupServicesToggle);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupServicesToggle);
+  } else {
+    setupServicesToggle();
+  }
 </script>

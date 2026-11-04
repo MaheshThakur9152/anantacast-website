@@ -9,18 +9,18 @@ interface Props {
 const { currentPath = Astro.url.pathname } = Astro.props;
 ---
 
-<header id="site-header" class="sticky top-0 left-0 right-0 z-50 transition-all duration-300 bg-white">
-  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-    <div class="flex justify-between items-center py-4">
+<header id="site-header" class="sticky top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    <div class="flex justify-between items-center py-3 sm:py-4">
       <!-- Logo -->
-      <div class="flex items-center">
-        <a href="/" class="pl-0 font-serif text-2xl font-bold text-blue-900">
+      <div class="flex items-center min-w-0 pr-2">
+        <a href="/" class="font-serif text-base sm:text-xl md:text-2xl font-bold text-blue-900 tracking-tight leading-tight line-clamp-2 md:line-clamp-none">
           {copy['header-logo']}
         </a>
       </div>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center space-x-12">
+      <nav class="hidden md:flex items-center space-x-8 lg:space-x-12 flex-shrink-0">
         <a
           href="/"
           class={`font-sans text-base font-medium transition-colors ${
@@ -56,7 +56,7 @@ const { currentPath = Astro.url.pathname } = Astro.props;
       <!-- Contact Us CTA Button -->
       <a
         href="/contact"
-        class="hidden md:flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-medium transition-colors"
+        class="hidden md:flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-5 lg:px-6 py-2.5 lg:py-3 rounded-full font-medium transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105 active:scale-95 flex-shrink-0"
       >
         <Mail class="w-[18px] h-[18px]" />
         <span>{copy['header-cta']}</span>
@@ -65,7 +65,7 @@ const { currentPath = Astro.url.pathname } = Astro.props;
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-toggle"
-        class="md:hidden p-2 text-gray-700 hover:text-blue-600 transition-colors focus:outline-none"
+        class="md:hidden p-2 -mr-1 text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-lg transition-colors focus:outline-none flex-shrink-0"
         aria-label="Toggle Navigation Menu"
       >
         <span id="menu-icon-open"><Menu class="w-6 h-6" /></span>
@@ -77,71 +77,81 @@ const { currentPath = Astro.url.pathname } = Astro.props;
   <!-- Mobile Menu Backdrop -->
   <div
     id="mobile-backdrop"
-    class="hidden fixed inset-0 z-40 bg-black/50 transition-opacity"
+    class="hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-xs transition-opacity duration-300"
   ></div>
 
-  <!-- Mobile Menu Sidebar -->
+  <!-- Mobile Menu Sidebar Drawer -->
   <div
     id="mobile-drawer"
-    class="fixed top-0 right-0 h-screen w-72 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto"
+    class="fixed top-0 right-0 h-screen w-72 max-w-[80vw] bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-out overflow-y-auto"
   >
     <!-- Close Button -->
     <button
       id="mobile-drawer-close"
-      class="absolute top-4 right-4 p-2 text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+      class="absolute top-4 right-4 p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors"
       aria-label="Close Navigation Menu"
     >
       <X class="w-6 h-6" />
     </button>
 
     <!-- Menu Content -->
-    <div class="pt-16 px-6">
-      <nav class="space-y-4">
+    <div class="pt-16 px-5 pb-8 flex flex-col h-full justify-between">
+      <nav class="space-y-2">
         <a
           href="/"
-          class={`block w-full text-left py-3 px-4 rounded-lg transition-colors ${
-            currentPath === '/' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+          class={`mobile-drawer-link block w-full text-left py-3 px-4 rounded-lg font-medium transition-all ${
+            currentPath === '/' ? 'text-blue-600 bg-blue-50 font-semibold' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
           }`}
         >
           {copy['header-mobile-home']}
         </a>
         <a
           href="/services"
-          class={`block w-full text-left py-3 px-4 rounded-lg transition-colors ${
-            currentPath === '/services' || currentPath === '/services/' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+          class={`mobile-drawer-link block w-full text-left py-3 px-4 rounded-lg font-medium transition-all ${
+            currentPath === '/services' || currentPath === '/services/' ? 'text-blue-600 bg-blue-50 font-semibold' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
           }`}
         >
           {copy['header-mobile-services']}
         </a>
         <a
           href="/#why-anantacast"
-          class="block w-full text-left py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors mobile-nav-anchor"
+          class="mobile-drawer-link block w-full text-left py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all"
         >
           {copy['header-mobile-why-us']}
         </a>
         <a
           href="/about"
-          class={`block w-full text-left py-3 px-4 rounded-lg transition-colors ${
-            currentPath === '/about' || currentPath === '/about/' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+          class={`mobile-drawer-link block w-full text-left py-3 px-4 rounded-lg font-medium transition-all ${
+            currentPath === '/about' || currentPath === '/about/' ? 'text-blue-600 bg-blue-50 font-semibold' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
           }`}
         >
           {copy['header-mobile-about']}
         </a>
         <a
           href="/#testimonials"
-          class="block w-full text-left py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors mobile-nav-anchor"
+          class="mobile-drawer-link block w-full text-left py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all"
         >
           {copy['header-mobile-testimonials']}
         </a>
         <a
           href="/contact"
-          class={`block w-full text-left py-3 px-4 rounded-lg transition-colors ${
-            currentPath === '/contact' || currentPath === '/contact/' ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+          class={`mobile-drawer-link block w-full text-left py-3 px-4 rounded-lg font-medium transition-all ${
+            currentPath === '/contact' || currentPath === '/contact/' ? 'text-blue-600 bg-blue-50 font-semibold' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
           }`}
         >
           {copy['header-mobile-contact']}
         </a>
       </nav>
+
+      <div class="pt-6 border-t border-gray-100">
+        <a
+          href="/contact"
+          class="mobile-drawer-link flex items-center justify-center gap-2 w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-4 rounded-xl font-semibold shadow-md transition-all active:scale-95 text-center"
+        >
+          <Mail class="w-4 h-4" />
+          <span>{copy['header-cta']}</span>
+        </a>
+      </div>
     </div>
   </div>
 </header>
@@ -155,18 +165,20 @@ const { currentPath = Astro.url.pathname } = Astro.props;
     const backdrop = document.getElementById('mobile-backdrop');
     const openIcon = document.getElementById('menu-icon-open');
     const closeIcon = document.getElementById('menu-icon-close');
-    const mobileLinks = document.querySelectorAll('.mobile-nav-anchor');
+    const drawerLinks = document.querySelectorAll('.mobile-drawer-link');
 
     // Sticky scroll effect
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header?.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-lg');
+    function onScroll() {
+      if (window.scrollY > 20) {
+        header?.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm');
         header?.classList.remove('bg-white');
       } else {
-        header?.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-lg');
+        header?.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm');
         header?.classList.add('bg-white');
       }
-    });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
     function openMenu() {
       drawer?.classList.remove('translate-x-full');
@@ -194,8 +206,12 @@ const { currentPath = Astro.url.pathname } = Astro.props;
 
     closeBtn?.addEventListener('click', closeMenu);
     backdrop?.addEventListener('click', closeMenu);
-    mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+    drawerLinks.forEach(link => link.addEventListener('click', closeMenu));
   }
 
-  document.addEventListener('DOMContentLoaded', setupHeader);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupHeader);
+  } else {
+    setupHeader();
+  }
 </script>

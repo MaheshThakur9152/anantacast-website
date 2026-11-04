@@ -1,5 +1,5 @@
 ---
-import { Facebook, Twitter, Instagram, Youtube, Phone, Mail, MapPin } from 'lucide-astro';
+import { Facebook, Twitter, Instagram, Youtube, Mail, MapPin } from 'lucide-astro';
 import copy from '../data/copy';
 
 const currentYear = new Date().getFullYear();
@@ -19,33 +19,15 @@ const currentYear = new Date().getFullYear();
         </p>
         <div class="space-y-3">
           <div class="flex items-center gap-3">
-            <Phone class="w-5 h-5 text-blue-400" />
-            <a href="tel:+919619607537" class="text-gray-300 hover:text-white transition-colors">
-              +91 9619607537
+            <Mail class="w-5 h-5 text-blue-400 flex-shrink-0" />
+            <a href={`mailto:${copy['footer-email']}`} class="text-gray-300 hover:text-white transition-colors break-all">
+              {copy['footer-email']}
             </a>
           </div>
-          <div class="flex items-center gap-3">
-            <Phone class="w-5 h-5 text-blue-400" />
-            <a href="tel:+917977018742" class="text-gray-300 hover:text-white transition-colors">
-              +91 7977018742
-            </a>
+          <div class="flex items-start gap-3 pt-1">
+            <MapPin class="w-5 h-5 text-blue-400 mt-1 flex-shrink-0" />
+            <span class="text-gray-300">{copy['footer-location']}</span>
           </div>
-          <div class="flex items-center gap-3">
-            <Phone class="w-5 h-5 text-blue-400" />
-            <a href="tel:+02245066566" class="text-gray-300 hover:text-white transition-colors">
-              +022 4506 6566
-            </a>
-          </div>
-        </div>
-        <div class="flex items-center gap-3 pt-3">
-          <Mail class="w-5 h-5 text-blue-400" />
-          <a href={`mailto:${copy['footer-email']}`} class="text-gray-300 hover:text-white transition-colors">
-            {copy['footer-email']}
-          </a>
-        </div>
-        <div class="flex items-start gap-3 pt-3">
-          <MapPin class="w-5 h-5 text-blue-400 mt-1" />
-          <span class="text-gray-300">{copy['footer-location']}</span>
         </div>
       </div>
 
