@@ -44,7 +44,13 @@ const stats = [
         <div class="grid grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-6 pt-4">
           {stats.map((stat) => (
             <div class="border-t-2 border-blue-600 pt-3 group">
-              <div class="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-600 mb-1 font-serif group-hover:translate-x-1 transition-transform duration-300">{stat.number}</div>
+              <div 
+                class="stat-counter text-3xl sm:text-4xl md:text-5xl font-bold text-blue-600 mb-1 font-serif group-hover:translate-x-1 transition-transform duration-300"
+                data-target={parseInt(stat.number.replace(/\D/g, '') || '0', 10)}
+                data-suffix={stat.number.replace(/\d/g, '')}
+              >
+                {stat.number}
+              </div>
               <div class="text-xs md:text-sm text-gray-900 font-medium leading-snug">{stat.label}</div>
             </div>
           ))}
@@ -54,3 +60,58 @@ const stats = [
     </div>
   </div>
 </section>
+
+<script>
+  function setupCounters() {
+    const counters = document.querySelectorAll<HTMLElement>('.stat-counter');
+    if (!counters.length) return;
+
+    // Respect user motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+          const target = parseInt(el.getAttribute('data-target') || '0', 10);
+          const suffix = el.getAttribute('data-suffix') || '';
+          const duration = 1800; // ms
+          const startTime = performance.now();
+
+          el.textContent = `0${suffix}`;
+
+          function animate(now: number) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease-out cubic: 1 - (1 - progress)^3
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(easeProgress * target);
+
+            el.textContent = `${current}${suffix}`;
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              el.textContent = `${target}${suffix}`;
+            }
+          }
+
+          requestAnimationFrame(animate);
+          observer.unobserve(el);
+        }
+      });
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    counters.forEach(c => observer.observe(c));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupCounters);
+  } else {
+    setupCounters();
+  }
+</script>
