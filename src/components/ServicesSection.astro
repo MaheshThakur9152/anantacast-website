@@ -21,37 +21,61 @@ const services = [
     icon: DraftingCompass,
     title: copy['service-card-1-title'],
     description: copy['service-card-1-desc'],
-    slug: 'patternmaking'
+    slug: 'patternmaking',
+    image: '/images/foundry_casting.webp',
+    imageAlt: 'High-tolerance patternmaking and tooling'
   },
   {
     icon: Flame,
     title: copy['service-card-2-title'],
     description: copy['service-card-2-desc'],
-    slug: 'casting'
+    slug: 'casting',
+    image: '/images/pouring-molten-metal-into-molds-during-a-foundry-casting-process-photo.webp',
+    imageAlt: 'Foundry casting and molten metal pouring'
   },
   {
     icon: Cog,
     title: copy['service-card-3-title'],
     description: copy['service-card-3-desc'],
-    slug: 'machining'
+    slug: 'machining',
+    video: {
+      webm: '/videos/Precision_Machining.webm',
+      mp4: '/videos/Precision_Machining.mp4',
+      poster: '/videos/Precision_Machining-poster.jpg'
+    }
   },
   {
     icon: ThermometerSun,
     title: copy['service-card-4-title'],
     description: copy['service-card-4-desc'],
-    slug: 'heat-treatment'
+    slug: 'heat-treatment',
+    video: {
+      webm: '/videos/Heat_Treatment_Conditioning.webm',
+      mp4: '/videos/Heat_Treatment_Conditioning.mp4',
+      poster: '/videos/Heat_Treatment_Conditioning-poster.jpg'
+    }
   },
   {
     icon: Disc,
     title: copy['service-card-5-title'],
     description: copy['service-card-5-desc'],
-    slug: 'finishing'
+    slug: 'finishing',
+    video: {
+      webm: '/videos/Surface_Finishing.webm',
+      mp4: '/videos/Surface_Finishing.mp4',
+      poster: '/videos/Surface_Finishing-poster.jpg'
+    }
   },
   {
     icon: CircleGauge,
     title: copy['service-card-6-title'],
     description: copy['service-card-6-desc'],
-    slug: 'metrology'
+    slug: 'metrology',
+    video: {
+      webm: '/videos/Quality_Metrology.webm',
+      mp4: '/videos/Quality_Metrology.mp4',
+      poster: '/videos/Quality_Metrology-poster.jpg'
+    }
   },
   {
     icon: Anvil,
@@ -114,11 +138,33 @@ const services = [
           }`}
           data-index={index}
         >
-          <!-- Styled Container (Maintains exact layout without media requests) -->
-          <div class="relative h-44 sm:h-56 overflow-hidden bg-gradient-to-br from-slate-100 via-gray-100 to-slate-200 border-b border-gray-100 flex items-center justify-center group-hover:scale-102 transition-transform duration-500">
-            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/90 backdrop-blur-sm border border-gray-200/60 shadow-sm flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform duration-300">
-              <service.icon class="w-7 h-7 sm:w-8 sm:h-8" />
-            </div>
+          <!-- Media Area -->
+          <div class="relative h-44 sm:h-56 overflow-hidden bg-gradient-to-br from-slate-100 via-gray-100 to-slate-200 border-b border-gray-100 flex items-center justify-center">
+            {service.video ? (
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster={service.video.poster}
+                class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              >
+                <source src={service.video.webm} type="video/webm" />
+                <source src={service.video.mp4} type="video/mp4" />
+              </video>
+            ) : service.image ? (
+              <img
+                src={service.image}
+                alt={service.imageAlt || service.title}
+                loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+            ) : (
+              <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/90 backdrop-blur-sm border border-gray-200/60 shadow-sm flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform duration-300">
+                <service.icon class="w-7 h-7 sm:w-8 sm:h-8" />
+              </div>
+            )}
           </div>
           
           <!-- Card Content -->
@@ -151,39 +197,57 @@ const services = [
 </section>
 
 <script>
-  function setupServicesToggle() {
+  function setupServices() {
+    // 1. Toggle extra services
     const btn = document.getElementById('toggle-services-btn');
     const btnText = document.getElementById('btn-text');
     const btnIcon = document.getElementById('btn-icon');
     const extraCards = document.querySelectorAll('.extra-service');
 
-    if (!btn || !btnText || !btnIcon) return;
+    if (btn && btnText && btnIcon) {
+      let isExpanded = false;
 
-    let isExpanded = false;
+      btn.addEventListener('click', () => {
+        isExpanded = !isExpanded;
+        extraCards.forEach(card => {
+          if (isExpanded) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
 
-    btn.addEventListener('click', () => {
-      isExpanded = !isExpanded;
-      extraCards.forEach(card => {
         if (isExpanded) {
-          card.classList.remove('hidden');
+          btnText.textContent = 'Show Less';
+          btnIcon.classList.add('rotate-180');
         } else {
-          card.classList.add('hidden');
+          btnText.textContent = 'View More Capabilities';
+          btnIcon.classList.remove('rotate-180');
         }
       });
+    }
 
-      if (isExpanded) {
-        btnText.textContent = 'Show Less';
-        btnIcon.classList.add('rotate-180');
-      } else {
-        btnText.textContent = 'View More Capabilities';
-        btnIcon.classList.remove('rotate-180');
-      }
-    });
+    // 2. Viewport-aware video autoplay / pause
+    const cardVideos = document.querySelectorAll<HTMLVideoElement>('#services video');
+    if (cardVideos.length && 'IntersectionObserver' in window) {
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const v = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            v.play().catch(() => {});
+          } else {
+            v.pause();
+          }
+        });
+      }, { threshold: 0.15 });
+
+      cardVideos.forEach(v => videoObserver.observe(v));
+    }
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupServicesToggle);
+    document.addEventListener('DOMContentLoaded', setupServices);
   } else {
-    setupServicesToggle();
+    setupServices();
   }
 </script>
