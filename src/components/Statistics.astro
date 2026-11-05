@@ -79,7 +79,7 @@ const stats = [
           const el = entry.target as HTMLElement;
           const target = parseInt(el.getAttribute('data-target') || '0', 10);
           const suffix = el.getAttribute('data-suffix') || '';
-          const duration = 1800; // ms
+          const duration = 1300; // ms
           const startTime = performance.now();
 
           el.textContent = `0${suffix}`;
@@ -87,8 +87,8 @@ const stats = [
           function animate(now: number) {
             const elapsed = now - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            // Ease-out cubic: 1 - (1 - progress)^3
-            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            // Quartic ease-out for swift start and buttery soft landing
+            const easeProgress = 1 - Math.pow(1 - progress, 4);
             const current = Math.floor(easeProgress * target);
 
             el.textContent = `${current}${suffix}`;

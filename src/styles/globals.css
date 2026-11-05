@@ -53,6 +53,93 @@ input, select, textarea {
   width: 8px;
 }
 
+/* Glassmorphism Header */
+.glass-header {
+  background-color: transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              backdrop-filter 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              -webkit-backdrop-filter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header-inner {
+  padding-top: 1.15rem;
+  padding-bottom: 1.15rem;
+  transition: padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-header.is-scrolled {
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+}
+
+.glass-header.is-scrolled .header-inner {
+  padding-top: 0.65rem;
+  padding-bottom: 0.65rem;
+}
+
+.header-logo,
+.header-nav-link,
+.header-menu-btn {
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-header.is-scrolled .header-logo {
+  color: #1e3a8a;
+}
+
+.glass-header.is-scrolled .header-nav-link {
+  color: #1f2937;
+}
+
+.glass-header.is-scrolled .header-nav-link:hover {
+  color: #2563eb;
+}
+
+.glass-header.is-scrolled .header-nav-link.is-active {
+  color: #2563eb;
+}
+
+.glass-header.is-scrolled .header-menu-btn {
+  color: #1f2937;
+}
+
+.glass-header.is-scrolled .header-menu-btn:hover {
+  color: #2563eb;
+  background-color: #f3f4f6;
+}
+
+/* Nav Link Underline Indicator Animation */
+.header-nav-link {
+  position: relative;
+}
+
+.header-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header-nav-link:hover::after,
+.header-nav-link.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
@@ -101,12 +188,20 @@ button:focus-visible {
 /* Enhanced fluid scroll reveal animations */
 .animate-on-scroll {
   opacity: 0;
-  transform: translateY(22px) scale(0.985);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(18px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 .animate-on-scroll.is-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
+
+/* Cascading stagger reveal for grid items */
+.grid > .animate-on-scroll:nth-child(1) { transition-delay: 0ms; }
+.grid > .animate-on-scroll:nth-child(2) { transition-delay: 70ms; }
+.grid > .animate-on-scroll:nth-child(3) { transition-delay: 140ms; }
+.grid > .animate-on-scroll:nth-child(4) { transition-delay: 210ms; }
+.grid > .animate-on-scroll:nth-child(5) { transition-delay: 280ms; }
+.grid > .animate-on-scroll:nth-child(6) { transition-delay: 350ms; }
